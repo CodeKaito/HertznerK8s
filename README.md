@@ -65,10 +65,10 @@ Di seguito alcuni comandi:
 
  - hcloud floating-ip create: Crea un nuovo indirizzo IP fluttuante.
 
-## Costi
+## Avvio di una macchina
+Hetzner offre VM, dedicated servers e hosting:
 
+- Cloud Server e Dedicated Root Server: configurazioni diverse come CPU e RAM, SSD e larghezza di banda.
 
-## Sicurezza
+- Dedicated vCPU Server: offre maggiore flessibilitá in quanto si paga solo per le vCPU e RAM utilizzate.
 
-
-## Automazione
