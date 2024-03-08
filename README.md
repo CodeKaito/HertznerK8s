@@ -65,10 +65,77 @@ Di seguito alcuni comandi:
 
  - hcloud floating-ip create: Crea un nuovo indirizzo IP fluttuante.
 
-## Avvio di una macchina
+### Hetzner Cloud Controller Manager
+
+https://github.com/hetznercloud/hcloud-cloud-controller-manager
+
+Il cloud-controller-manager di Hetzner integra il cluster Kubernetes con le API Hetzner Cloud & Robot.
+
+Vantaggio principale: maggiore automazione e integrazione Kubernetes/Hetzner Cloud
+
+- Consistenza nell'orchestrazione delle risorse: compatibilitá con Kubernetes per la gestione delle risorse Hetzner all'interno del cluster Kubernetes.
+
+- Facilità nell'implementazione di nuovi nodi: Rende la gestione per l'aggiunta di nuovi nodi al cluster Kubernetes molto semplificata. É possibile scalare orizzontalmente senza gestire l'infrastruttura sottostante.
+
+### CSI-Driver (Container Storage Interface)
+
+[https://github.com/hetznercloud/csi-driver]
+
+Utilizzato per la creazione di volumi persistenti per l'archiviazione e gestione dello storage all'interno dei container.
+Semplifica l'allocazione, il montaggio e la gestione dello storage necessario per le applicazioni containerizzate.
+
+Vantaggi:
+ - Provisioning dinamico: I driver CSI consentono la creazione dinamica di volumi di archiviazione in base alle esigenze delle applicazioni.
+
+ - Gestione semplificata: Facilitano la gestione dello storage all'interno di un cluster Kubernetes, offrendo un'interfaccia comune.
+
+ - Portabilità: L'utilizzo di uno standard come CSI rende più semplice spostare applicazioni e carichi di lavoro tra cluster Kubernetes che utilizzano diversi fornitori di storage.
+
+## VM Hetzner
 Hetzner offre VM, dedicated servers e hosting:
 
 - Cloud Server e Dedicated Root Server: configurazioni diverse come CPU e RAM, SSD e larghezza di banda.
 
 - Dedicated vCPU Server: offre maggiore flessibilitá in quanto si paga solo per le vCPU e RAM utilizzate.
 
+L'uso di vCPU dedicate é l'ideale per un cluster kubernetes per ottimizzare le prestazioni del cluster in base alle esigenze specifiche. É possibile dimensionare le risorse in base alle necessitá sfruttando il pay as you go. 
+
+# Getting started
+
+- Creazione del progetto in Hetzner
+
+- Selezione della vm
+
+- Creazione chiavi SSH
+
+- Creazione API TOKEN
+
+- Creazione della folder terraform
+
+- kubespray.io
+
+- Infrastructure Setup con Terraform
+```terraform
+provider "hcloud" {
+ token="${var.HCLOUD_API_TOKEN"
+}
+```
+
+```terraform
+terraform {
+ required_providers {
+  hcloud = {
+   source = "hetznercloud/hcloud"
+  }
+}
+required _version = ">=0.14"
+}
+```
+
+- Kubernetes Cluster Deployment with Kubespray
+
+- Verifying the Cluster
+
+- Load Balancer Setup
+
+- Conclusion
