@@ -79,7 +79,7 @@ Vantaggio principale: maggiore automazione e integrazione Kubernetes/Hetzner Clo
 
 ### CSI-Driver (Container Storage Interface)
 
-[https://github.com/hetznercloud/csi-driver]
+https://github.com/hetznercloud/csi-driver
 
 Utilizzato per la creazione di volumi persistenti per l'archiviazione e gestione dello storage all'interno dei container.
 Semplifica l'allocazione, il montaggio e la gestione dello storage necessario per le applicazioni containerizzate.
@@ -115,22 +115,6 @@ L'uso di vCPU dedicate é l'ideale per un cluster kubernetes per ottimizzare le 
 - kubespray.io
 
 - Infrastructure Setup con Terraform
-```terraform
-provider "hcloud" {
- token="${var.HCLOUD_API_TOKEN"
-}
-```
-
-```terraform
-terraform {
- required_providers {
-  hcloud = {
-   source = "hetznercloud/hcloud"
-  }
-}
-required _version = ">=0.14"
-}
-```
 
 - Kubernetes Cluster Deployment with Kubespray
 
