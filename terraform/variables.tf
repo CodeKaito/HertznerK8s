@@ -4,9 +4,17 @@ variable "HCLOUD_API_TOKEN" {
   sensitive = true
 }
 
-variable "EXTERNAL_SSH_KEY" {
+variable "NICK_SSH_KEY" {
   type = string
   sensitive = true
 }
 
+variable "JERO_SSH_KEY" {
+  type = string
+  sensitive = true
+}
 
+variable "GABR_SSH_KEY" {
+  type = string
+  sensitive = true
+}
