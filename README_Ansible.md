@@ -4,3 +4,4 @@ Playbook Ansible creati per configurare un cluster Kubernetes completamente auto
 Funzionerà su server fisici, macchine virtuali, aws cloud, google cloud o qualsiasi altro server cloud. Questo è stato testato e verificato sui sistemi operativi Centos 7.3 a 64 bit. 
 Inoltre è possibile fare riferimento a questo collegamento per la configurazione manuale
 
+## 
