@@ -17,7 +17,7 @@ Inoltre è possibile fare riferimento a questo collegamento per la configurazion
 ```
 
 2. join_kubernetes_workers_nodes.yml
-3. 
+
 ```yml
 ---
 - import_playbook: playbooks/configure_worker_nodes.yml
