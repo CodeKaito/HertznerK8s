@@ -23,6 +23,9 @@ Inoltre è possibile fare riferimento a questo collegamento per la configurazion
 - import_playbook: playbooks/configure_worker_nodes.yml
 ```
 
+## Environment variables
+File env_variables per le variabili d'ambiente
+
 ## Swap disabling
 Poiché l'abilitazione dello swap consente un maggiore utilizzo della memoria per i carichi di lavoro in Kubernetes che non possono essere previsti con precisione, aumenta anche il rischio di "vicini rumorosi" e configurazioni di impacchettamento impreviste, poiché lo scheduler non può tener conto dell'utilizzo della memoria di swap.
 
