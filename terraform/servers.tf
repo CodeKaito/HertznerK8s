@@ -1,6 +1,6 @@
 #Configure Hetzner Server Cloud Resources 
 resource "hcloud_server" "kube-master" {
-  name = "kuber-master"
+  name = "kube-master"
   image = "rocky-9" #da vedere
   server_type = "cx11" 
   datacenter  = "hel1-dc2"
