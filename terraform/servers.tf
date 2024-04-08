@@ -34,3 +34,11 @@ resource "hcloud_server" "kube-worker" {
     ip         = "172.16.0.12${count.index + 1}"
   }
 }
+
+# Aggiunta dello snippet per collegare il playbook ansible
+resource "null_resource" "ansible_provisioner" {
+  provisioner "local-exec" {
+    command     = "ansible-playbook -i ${self.private_ip}, playbook_test.yml"
+    working_dir = "${path.module}/ansible"
+  }
+}
