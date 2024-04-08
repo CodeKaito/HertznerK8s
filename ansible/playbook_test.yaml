@@ -1,0 +1,10 @@
+---
+- hosts: master-node
+  become: true
+  tasks:
+    - name: Add worker nodes to /etc/hosts
+      lineinfile:
+        path: /etc/hosts
+        line: "{{ hostvars[item]['ansible_default_ipv4']['address'] }} {{ hostvars[item]['inventory_hostname'] }}"
+        state: present
+      with_items: "{{ groups['worker-nodes'] }}"
