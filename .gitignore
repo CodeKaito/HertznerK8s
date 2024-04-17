@@ -1,2 +1,6 @@
 .ssh
+.terraform
 .terraform.lock.hcl
+plan
+*.tfvars
+*.tfstate
