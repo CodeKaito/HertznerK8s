@@ -33,7 +33,7 @@ resource "hcloud_server" "kube-master" {
     type        = "ssh"
     user        = "jerome.decinco"
     host        = self.ipv4_address
-    private_key = file(var.JERO_SSH_KEY)
+    private_key = file(".ssh/id_rsa")
   }
 }
 
