@@ -19,6 +19,14 @@ resource "hcloud_server" "kube-master" {
   depends_on = [
     hcloud_network_subnet.kubernetes-node-subnet
   ]
+
+  # Esegui lo script bash dopo che il server è pronto
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x bash.sh", 
+      "./bash.sh",   
+    ]
+  }
 }
 
 resource "hcloud_server" "kube-worker" {
@@ -34,13 +42,6 @@ resource "hcloud_server" "kube-worker" {
     ip         = "172.16.0.12${count.index + 1}"
   }
 
-  # Esegui lo script bash dopo che il server è pronto
-  provisioner "remote-exec" {
-    inline = [
-      "chmod +x bash.sh", 
-      "./bash.sh",   
-    ]
-  }
 }
 
 # # Aggiunta dello snippet per collegare il playbook ansible
