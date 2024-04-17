@@ -1,6 +1,6 @@
 .ssh
 .terraform
-.terraform.lock.hcl
+.terraform*
 plan
 *.tfvars
 *.tfstate
