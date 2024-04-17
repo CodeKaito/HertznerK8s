@@ -31,7 +31,7 @@ resource "hcloud_server" "kube-master" {
   # Configurazione della connessione SSH per il kube-master
   connection {
     type        = "ssh"
-    user        = JERO_SSH_KEY
+    user        = "jerome.decinco"
     host        = self.ipv4_address
     private_key = file(var.JERO_SSH_KEY)
   }
