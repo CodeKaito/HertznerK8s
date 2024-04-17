@@ -33,12 +33,20 @@ resource "hcloud_server" "kube-worker" {
     network_id = hcloud_network.kubernetes-node-network.id
     ip         = "172.16.0.12${count.index + 1}"
   }
-}
 
-# Aggiunta dello snippet per collegare il playbook ansible
-resource "null_resource" "ansible_provisioner" {
-  provisioner "local-exec" {
-    command = "ansible-playbook -i ${join(",", hcloud_server.kube-worker.*.ipv4_address)} playbook_test.yml"
-    working_dir = "${path.module}/ansible"
+  # Esegui lo script bash dopo che il server è pronto
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x bash.sh", 
+      "./bash.sh",   
+    ]
   }
 }
+
+# # Aggiunta dello snippet per collegare il playbook ansible
+# resource "null_resource" "ansible_provisioner" {
+#   provisioner "local-exec" {
+#     command = "ansible-playbook -i ${join(",", hcloud_server.kube-worker.*.ipv4_address)} playbook_test.yml"
+#     working_dir = "${path.module}/ansible"
+#   }
+# }
