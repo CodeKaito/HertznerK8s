@@ -20,7 +20,7 @@ resource "hcloud_server" "kube-master" {
     hcloud_network_subnet.kubernetes-node-subnet
   ]
 
-  # Esegui lo script bash dopo che il server è pronto
+  # Esegui lo script bash dopo che il kube-master sará pronto
   provisioner "remote-exec" {
     inline = [
       "chmod +x bash.sh", 
