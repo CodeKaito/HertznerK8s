@@ -20,21 +20,6 @@ resource "hcloud_server" "kube-master" {
     hcloud_network_subnet.kubernetes-node-subnet
   ]
 
-  # Esegui lo script bash dopo che il kube-master sará pronto
-  provisioner "remote-exec" {
-    inline = [
-      "chmod +x bash.sh", 
-      "./bash.sh",   
-    ]
-  }
-
-  # Configurazione della connessione SSH per il kube-master
-  connection {
-    type        = "ssh"
-    user        = "jerome.decinco"
-    host        = self.ipv4_address
-    private_key = file(".ssh/id_rsa")
-  }
 }
 
 resource "hcloud_server" "kube-worker" {
@@ -51,11 +36,3 @@ resource "hcloud_server" "kube-worker" {
   }
 
 }
-
-# # Aggiunta dello snippet per collegare il playbook ansible
-# resource "null_resource" "ansible_provisioner" {
-#   provisioner "local-exec" {
-#     command = "ansible-playbook -i ${join(",", hcloud_server.kube-worker.*.ipv4_address)} playbook_test.yml"
-#     working_dir = "${path.module}/ansible"
-#   }
-# }
