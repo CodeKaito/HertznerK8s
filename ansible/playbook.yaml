@@ -1,0 +1,91 @@
+- name: Terraform
+  hosts: localhost
+  connection: local
+  become: yes
+  tasks:
+    - name: Repository Hashicorp
+      become: yes
+      command: wget -O- https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+
+    - name: Installazione di Terraform
+      become: yes
+      dnf:
+        name: terraform
+        state: present
+
+    - name: Controllo della versione di Terraform
+      command: terraform --version
+      register: terraform_version_output
+
+    - name: Stampare la versione di Terraform
+      debug:
+        msg: "{{ terraform_version_output.stdout }}"
+      when: terraform_version_output.rc == 0
+
+
+    - name: Decrypt API token from Ansible Vault
+      ansible.builtin.include_vars:
+        file: ../vault.yaml
+        name: vault_data
+
+
+    - name: Generate terraform.auto.tfvars
+      ansible.builtin.template:
+        src: ~/HetznerK8s/terraform/templates/terraform.auto.tfvars.j2
+        dest: ../terraform/terraform.auto.tfvars
+      vars:
+        hcloud_api_token: "{{ vault_data.hcloud_api_token }}"
+
+
+    - name: Esegui terraform init
+      command: terraform init
+      args:
+        chdir: ../terraform
+
+    - name: Esegui terraform plan
+      command: terraform plan --out plan
+      args:
+        chdir: ../terraform
+
+    - name: Applica il piano terraform
+      command: terraform apply -auto-approve
+      args:
+        chdir: ../terraform
+
+- name: Leggi gli host dall'inventario
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Carica gli host dall'inventario
+      include_vars:
+        file: inventory.yaml
+        name: inventory_data
+
+    - name: Converti il dizionario in una lista di coppie chiave-valore
+      set_fact:
+        host_list: "{{ inventory_data['all']['hosts'] | dict2items }}"
+
+    - name: Aggiungi gli host all'inventario in runtime
+      add_host:
+        name: "{{ item.value.ansible_host }}"
+        groups: runtime_hosts
+      loop: "{{ host_list }}"
+
+- name: Setta opzioni SSH globali
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Imposta opzioni SSH globali
+      ansible.builtin.set_fact:
+        ansible_ssh_common_args: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+
+
+- name: Pinga tutti gli host
+  hosts: all
+  tasks:
+    - name: Pinga gli host
+      ansible.builtin.ping:
+
+    - name: Stampa messaggio
+      ansible.builtin.debug:
+        msg: "Ciao! Siamo i nodi K8s"

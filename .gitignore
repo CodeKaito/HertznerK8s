@@ -1,7 +1,4 @@
 .ssh
-.terraform
 .terraform*
 plan
 *.tfvars
-*.tfstate
-.env

@@ -1,10 +1,9 @@
-#Configure Hetzner Server Cloud Resources 
 resource "hcloud_server" "kube-master" {
   name = "kube-master"
-  image = "rocky-9" #da vedere
-  server_type = "cx11" 
+  image = "rocky-9" #
+  server_type = "cx21"
   datacenter  = "hel1-dc2"
-  ssh_keys = [ "SSH_KEY" ]
+  ssh_keys = [ "id_extraordy_challenge" ]
 
   network {
     network_id = hcloud_network.kubernetes-node-network.id
@@ -15,7 +14,7 @@ resource "hcloud_server" "kube-master" {
     ipv4_enabled = true
     ipv6_enabled = false
   }
-  
+
   depends_on = [
     hcloud_network_subnet.kubernetes-node-subnet
   ]
@@ -28,8 +27,8 @@ resource "hcloud_server" "kube-worker" {
   image       = "rocky-9"
   server_type = "cx21"
   datacenter  = "hel1-dc2"
-  ssh_keys = [ "SSH_KEY" ]
-  
+  ssh_keys = [ "id_extraordy_challenge" ]
+
   network {
     network_id = hcloud_network.kubernetes-node-network.id
     ip         = "172.16.0.12${count.index + 1}"

@@ -4,8 +4,4 @@ variable "HCLOUD_API_TOKEN" {
   sensitive = true
 }
 
-variable "SSH_KEY" {
-  type = string
-  sensitive = true
-}
 
