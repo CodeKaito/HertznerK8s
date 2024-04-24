@@ -22,21 +22,6 @@
         msg: "{{ terraform_version_output.stdout }}"
       when: terraform_version_output.rc == 0
 
-
-    - name: Decrypt API token from Ansible Vault
-      ansible.builtin.include_vars:
-        file: ../vault.yaml
-        name: vault_data
-
-
-    - name: Generate terraform.auto.tfvars
-      ansible.builtin.template:
-        src: ~/HetznerK8s/terraform/templates/terraform.auto.tfvars.j2
-        dest: ../terraform/terraform.auto.tfvars
-      vars:
-        hcloud_api_token: "{{ vault_data.hcloud_api_token }}"
-
-
     - name: Esegui terraform init
       command: terraform init
       args:
