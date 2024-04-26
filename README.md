@@ -3,7 +3,8 @@
 ## Descrizione progetto
 Creazione di un cluster K8s su Hetzner composto da tre nodi (master, worker). Dovrà essere possibile creare/distruggere l’ambiente al bisogno, quindi si consiglia di utilizzare dei tool di automazione per la configurazione ed il provisioning delle macchine (es: Ansible e Terraform).
 
-![image info](images/HETZNERK8S.png)
+![image](https://github.com/CodeKaito/HetznerK8s/assets/57111980/f643bed6-9b75-4041-b86a-5083ac32ab51)
+
 
 ## Perché Hertzner?
 Hetzner Cloud offre una vasta gamma di servizi ideali per lo sviluppo di architetture cloud. Ciò che distingue Hetzner Cloud dagli altri provider cloud è la sua interfaccia utente intuitiva e l'API user-friendly, la presenza dei datacenter in Europa e i suoi prezzi altamente competitivi rispetto a concorrenti come GCP, Azure e AWS.
